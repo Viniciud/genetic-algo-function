@@ -1,0 +1,23 @@
+body {
+  background: white;
+}
+
+.stats,
+.all,
+.best {
+  font-family: "Courier";
+}
+
+.all {
+  min-width: 300px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.best {
+  font-size: 48px;
+}
+
+.stats {
+  font-size: 24px;
+}

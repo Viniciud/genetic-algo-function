@@ -35,7 +35,7 @@ class DNA {
     mutate(mutationRate) {
         console.log('BEFORE MUTATION ', this.encodedGen);
         console.log('BEFORE NUMBER', this.bin2Dec(this.encodedGen));
-        for (let i = 0; i < this.encodedGen.length; i++) {
+        for (let i = 1; i < this.encodedGen.length; i++) {
             if (random(1) < mutationRate) {
                 this.encodedGen[i] = parseInt(random([0, 1]));
             }

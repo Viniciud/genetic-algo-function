@@ -1,10 +1,11 @@
 let target = 0;
 let maxX = -10;
-let interval = [-10, 10];
+let interval = [-11, 11];
 let popMax;
+let maxGenerations = 5;
 let mutationRate = 0.1;
 let crossoverRate = 0.7
-let population = 4;
+let population;
 
 let bestNumber;
 let allNumbers;
@@ -12,33 +13,54 @@ let stats;
 var numBits = 4;
 
 function setup() {
-  createCanvas(640, 360);
+  bestNumber = createP("Best number:");
+  bestNumber.class("best");
+
+  allNumbers = createP("All numbers:");
+  allNumbers.position(600, 10);
+  allNumbers.class("all");
+
+  stats = createP("Stats");
+  stats.class("stats");
+
+  //createCanvas(640, 360);
+  popMax = 4;
+  mutationRate = 0.01;
   target = (maxX * maxX) - 3 * (maxX) + 4;
-  let pop = new Population(target, mutationRate, crossoverRate, population);
+  population = new Population(target, mutationRate, crossoverRate, popMax);
   console.log('POPULATION ', pop)
   console.log('target ', target)
 }
 
 function draw() {
-  background(220);
+  // Generate mating pool
+  population.tournamentSelection();
+  //Create next generation
+  population.generate();
+
+  population.evaluate();
+
+  displayInfo();
+
+  if (population.isFinished() || population.generations == maxGenerations) {
+    noLoop();
+  }
 }
 
 function displayInfo() {
-  // Display current status of population
-  // let answer = population.getBest();
+  let answer = population.getBest();
 
-  // bestPhrase.html("Best phrase:<br>" + answer);
+  bestNumber.html("Best number:<br>" + answer);
 
-  // let statstext =
-  //   "total generations:     " + population.getGenerations() + "<br>";
-  // statstext +=
-  //   "average fitness:       " + nf(population.getAverageFitness()) + "<br>";
-  // statstext += "total population:      " + popmax + "<br>";
-  // statstext += "mutation rate:         " + floor(mutationRate * 100) + "%";
+  let statstext =
+    "total generations:     " + population.getGenerations() + "<br>";
 
-  // stats.html(statstext);
+  statstext += "total population:      " + popMax + "<br>";
+  statstext += "mutation rate:         " + floor(mutationRate * 100) + "%";
 
-  // allPhrases.html("All phrases:<br>" + population.allPhrases());
+  stats.html(statstext);
+
+  allNumbers.html("All numbers:<br>" + population.allNumbers());
 }
 
 
