@@ -1,5 +1,5 @@
-let maxX = -10;
 let interval = [-11, 11];
+let maxX = interval[0] + 1;
 let popMax = 4;
 let maxGenerations = 5;
 let mutationRate = 0.01;
