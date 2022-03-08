@@ -1,9 +1,8 @@
-let target = 0;
 let maxX = -10;
 let interval = [-11, 11];
-let popMax;
+let popMax = 4;
 let maxGenerations = 5;
-let mutationRate = 0.1;
+let mutationRate = 0.01;
 let crossoverRate = 0.7
 let population;
 
@@ -11,22 +10,17 @@ let bestNumber;
 let allNumbers;
 let stats;
 var numBits = 4;
+let target = (maxX * maxX) - 3 * (maxX) + 4;
 
 function setup() {
   bestNumber = createP("Best number:");
   bestNumber.class("best");
-
   allNumbers = createP("All numbers:");
   allNumbers.position(600, 10);
   allNumbers.class("all");
-
   stats = createP("Stats");
   stats.class("stats");
 
-  //createCanvas(640, 360);
-  popMax = 4;
-  mutationRate = 0.01;
-  target = (maxX * maxX) - 3 * (maxX) + 4;
   population = new Population(target, mutationRate, crossoverRate, popMax);
   console.log('POPULATION ', pop)
   console.log('target ', target)

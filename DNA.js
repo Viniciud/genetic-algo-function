@@ -21,7 +21,7 @@ class DNA {
         console.log('BEFORE CHILD ENCODED GEN  ', child.encodedGen)
 
         let midpoint = ceil((crossoverRate) * (this.encodedGen.length - 1));
-
+        console.log('CROSR ', crossoverRate);
         console.log('MIDPOINT ', midpoint);
 
         for (let i = 1; i < this.encodedGen.length; i++) {
