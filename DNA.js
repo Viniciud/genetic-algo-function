@@ -35,8 +35,13 @@ class DNA {
     mutate(mutationRate) {
         console.log('BEFORE MUTATION ', this.encodedGen);
         console.log('BEFORE NUMBER', this.bin2Dec(this.encodedGen));
-        for (let i = 1; i < this.encodedGen.length; i++) {
-            if (random(1) < mutationRate) {
+        for (let i = 0; i < this.encodedGen.length; i++) {
+            if (i == 0) {
+                if (random(1) < mutationRate) {
+                    this.encodedGen[0] = this.encodedGen[0] == '+' ? '-' : '+';
+                }
+            }
+            else if (random(1) < mutationRate) {
                 this.encodedGen[i] = parseInt(random([0, 1]));
             }
         }
@@ -83,11 +88,3 @@ class DNA {
         return vectorBin;
     }
 }
-
-
-
-/**
- * individuos []
- * 
- * 
- */

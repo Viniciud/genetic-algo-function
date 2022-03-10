@@ -1,20 +1,18 @@
 
 
 class Population {
-    constructor(t, mutation, crossoverRate, popNumber) {
-        this.population;
+    constructor(target, mutation, crossoverRate, popNumber) {
+        this.population = [];
         this.matingPool;
         this.generations = 0;
         this.finished = false;
-        this.target = t;
+        this.target = target;
         this.mutationRate = mutation;
         this.crossoverRate = crossoverRate;
-        this.popPercent = [];
-        this.perfectScore = 134;
 
         this.best = "";
 
-        this.population = [];
+
         for (let i = 0; i < popNumber; i++) {
             this.population[i] = new DNA(interval);
         }
@@ -44,8 +42,10 @@ class Population {
     generate() {
         for (let i = 0; i < this.population.length; i++) {
             let a = floor(random(this.matingPool.length));
-            let b = floor(random(this.matingPool.length));
-
+            let b;
+            do {
+                b = floor(random(this.matingPool.length));
+            } while (a == b);
             let partnerA = this.matingPool[a];
             let partnerB = this.matingPool[b];
 
@@ -68,7 +68,7 @@ class Population {
         }
         console.log('WORD RECORD ', worldrecord)
         this.best = this.population[index].translatedGen;
-        if (worldrecord == this.perfectScore) {
+        if (worldrecord == this.target) {
             this.finished = true;
         }
     }
